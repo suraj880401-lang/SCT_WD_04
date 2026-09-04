@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f4ee">
+  <title>Daymark | Personal tasks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">D</span><span>daymark</span></div>
+      <div class="sidebar-section">
+        <p class="eyebrow">Workspace</p>
+        <button class="nav-item active" data-view="all"><span class="nav-icon">◷</span> All tasks <span class="nav-count" id="all-count">0</span></button>
+        <button class="nav-item" data-view="today"><span class="nav-icon">▣</span> Today <span class="nav-count" id="today-count">0</span></button>
+        <button class="nav-item" data-view="upcoming"><span class="nav-icon">↗</span> Upcoming <span class="nav-count" id="upcoming-count">0</span></button>
+        <button class="nav-item" data-view="completed"><span class="nav-icon">✓</span> Completed <span class="nav-count" id="completed-count">0</span></button>
+      </div>
+      <div class="sidebar-section lists-section">
+        <div class="section-heading"><p class="eyebrow">My lists</p><button class="icon-button" id="add-list" aria-label="Add a list" title="Add a list">+</button></div>
+        <div id="list-nav"></div>
+      </div>
+      <div class="sidebar-footer"><div class="avatar">SK</div><div><strong>Personal space</strong><span>Everything in one place</span></div><button class="more-button" aria-label="More options">•••</button></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div class="breadcrumb"><span>Workspace</span><span>/</span><strong id="breadcrumb-label">All tasks</strong></div><div class="top-actions"><button class="search-button" id="search-toggle"><span>⌕</span> Search <kbd>⌘ K</kbd></button><button class="circle-button" aria-label="Notifications">♧</button><button class="circle-button user-button" aria-label="Profile">SK</button></div></header>
+      <div class="content-wrap">
+        <section class="page-heading"><div><div class="date-label" id="date-label"></div><h1 id="page-title">All tasks <span class="title-count" id="title-count">0</span></h1></div><button class="primary-button" id="new-task"><span>+</span> New task</button></section>
+        <section class="stats-row"><div><span class="stat-value" id="stat-open">0</span><span class="stat-label">open tasks</span></div><div><span class="stat-value" id="stat-done">0%</span><span class="stat-label">completed</span></div><div><span class="stat-value" id="stat-due">0</span><span class="stat-label">due this week</span></div></section>
+        <div class="filter-bar"><div class="filter-tabs"><button class="filter-tab active" data-filter="all">All</button><button class="filter-tab" data-filter="active">Active</button><button class="filter-tab" data-filter="completed">Completed</button></div><button class="sort-button" id="sort-button">Sort by <strong>date added</strong> <span>⌄</span></button></div>
+        <section id="task-list" class="task-list" aria-live="polite"></section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="task-modal"><form class="modal" id="task-form"><div class="modal-header"><div><p class="eyebrow">Task details</p><h2 id="modal-title">New task</h2></div><button type="button" class="close-button" id="close-modal" aria-label="Close">×</button></div><label class="form-label">Task name<input required id="task-name" maxlength="120" placeholder="What needs doing?"></label><label class="form-label">Notes<textarea id="task-notes" rows="3" placeholder="Add a little context..." maxlength="300"></textarea></label><div class="form-grid"><label class="form-label">Due date<input type="date" id="task-date"></label><label class="form-label">Time<input type="time" id="task-time"></label></div><label class="form-label">List<select id="task-list-select"></select></label><div class="modal-actions"><button type="button" class="text-button danger hidden" id="delete-task">Delete task</button><span></span><button type="button" class="secondary-button" id="cancel-modal">Cancel</button><button class="primary-button" type="submit">Save task</button></div></form></div>
+  <div class="modal-backdrop hidden" id="list-modal"><form class="modal small-modal" id="list-form"><div class="modal-header"><div><p class="eyebrow">Organize</p><h2>New list</h2></div><button type="button" class="close-button" id="close-list-modal">×</button></div><label class="form-label">List name<input required id="list-name" maxlength="30" placeholder="e.g. Home, Learning"></label><div class="modal-actions"><span></span><button type="button" class="secondary-button" id="cancel-list">Cancel</button><button class="primary-button" type="submit">Create list</button></div></form></div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
